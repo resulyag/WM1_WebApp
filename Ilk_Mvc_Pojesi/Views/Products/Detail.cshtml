@@ -1,0 +1,39 @@
+﻿@model Product
+@*<h3>@Model.ProductId</h3>
+    <h1>@Model.ProductName</h1>
+    <h3>@Model.Category.CategoryName</h3>*@
+
+
+<h2 style="text-align:center;">@Model.ProductName</h2>
+<br />
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th style="text-align:right">Id :</th>
+                    <td>@Model.ProductId</td>
+                </tr>
+                <tr>
+                    <th style="text-align:right">Adı :</th>
+                    <td>@Model.ProductName</td>
+                </tr>
+                <tr>
+                    <th style="text-align:right">Kategori :</th>
+                    <td>@Model.Category.CategoryName</td>
+                </tr>
+                <tr>
+                    <th style="text-align:right">Birim Fiyat :</th>
+                    <td>@Model.UnitPrice</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+
+
+
