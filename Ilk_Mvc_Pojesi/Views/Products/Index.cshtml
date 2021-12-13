@@ -1,31 +1,54 @@
 ﻿@model List<Product>
-
-    <div class="row" style="text-align:center">
-        <div style="margin-left:auto;margin-right:auto">
-            <table class="table-bordered">
-                <thead>
+<h2> Toplam Kayıt: @Model.Count</h2>
+<div class="row" style="text-align:center">
+    <div style="margin-left:auto;margin-right:auto">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Kategori Adı</th>
+                    <th>Ürün Adı</th>
+                    <th>Fiyat</th>
+                    <th>Tedarikçisi</th>
+                    <th>Detay</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>Ürün Id</th>
-                        <th>Ürün Adı</th>
-                        <th>Kategori Adı</th>
-                        <th>Birim Fiyat</th>
-                        <th>Detay</th>
+                        <td>@item.Category?.CategoryName</td>
+                        <td>@item.ProductName</td>
+                        <td>@($"{item.UnitPrice:c2}")</td>
+                        <td>@(item.Supplier == null ? Html.Raw(@"<u>Tedarikçisi yok</u>")  : item.Supplier.CompanyName)</td>
+                        <td>
+                            <a class="btn btn-info" asp-controller="Products" asp-action="Detail" asp-route-id="@item.ProductId">Detay</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.ProductId</td>
-                            <td>@item.ProductName</td>
-                            <td>@item.Category.CategoryName</td>
-                            <td>@item.UnitPrice</td>
-                            <td class="btn btn-info btn-block">
-                                <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.ProductId">Detay</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
+        <input type="button" value="Önceki Sayfa" class="btn btn-success page" id="btn-onceki" />
+        @ViewBag.Page/@ViewBag.limit
+        <input type="button" value="Sonraki Sayfa" class="btn btn-success page" id="btn-sonraki" />
     </div>
+</div>
+@section Scripts{
+    <script>
+        var limit =@ViewBag.Limit;
+        var page = @ViewBag.Page;
+        $("#btn-onceki").click(function () {
+            if (page > 1) {
+                page -= 1;
+                var url = "Products/Index?page=" + page;
+                var url2 = '@Url.Action("Index", "Products", new { page = ViewBag.Page - 1 })';
+                window.location.href = url2;
+            }
+        });
+        $("#btn-sonraki").click(function () {
+            if (page < limit) {
+                var url2 = '@Url.Action("Index", "Products", new { page = ViewBag.Page+1 })';
+                window.location.href = url2;
+            }
+        });
+    </script>
+}
