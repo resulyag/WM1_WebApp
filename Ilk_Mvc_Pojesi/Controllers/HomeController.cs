@@ -20,7 +20,7 @@ namespace Ilk_Mvc_Pojesi.Controllers
 
         public IActionResult Index()
         {
-            var model = UrunManager.GetUrunler();
+            List<Urun> model = UrunManager.GetUrunler();
             return View(model);
         }
 

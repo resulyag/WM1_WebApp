@@ -15,5 +15,6 @@ namespace Ilk_Mvc_Pojesi.ViewModels
         [Display(Name ="Açıklama")]
         public string Description { get; set; }
         public int CategoryId { get; set; }
+        public int ProductCount { get; set; }
     }
 }
