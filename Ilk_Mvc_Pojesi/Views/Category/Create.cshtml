@@ -4,7 +4,7 @@
     <div asp-validation-summary="All"></div>
 </div>
 
-<form method="post" asp-action="Create" asp-controller="Category">
+<form id="frm-add">
     <label asp-for="CategoryName"></label>
     <input asp-for="CategoryName" />
     <span class="text-danger" asp-validation-for="CategoryName"></span>

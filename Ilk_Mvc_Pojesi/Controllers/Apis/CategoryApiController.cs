@@ -6,6 +6,7 @@ using Ilk_Mvc_Pojesi.Models;
 using Ilk_Mvc_Pojesi.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Ilk_Mvc_Pojesi.Controllers.Apis
 {
@@ -38,6 +39,92 @@ namespace Ilk_Mvc_Pojesi.Controllers.Apis
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);                
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddCategory(CategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _dbContext.Categories.Add(new Category
+            {
+                CategoryName = model.CategoryName,
+                Description = model.Description
+            });
+            try
+            {
+                _dbContext.SaveChanges();
+                return Ok("Kategori ekleme işlemi başarılı");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("~/api/categoryapi/updatecategory/{id?}")]
+        public IActionResult UpdateCategory(int? id,CategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var category = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
+            if (category==null)
+            {
+                return NotFound("Kategori Bulunamadı");
+            }
+
+            category.CategoryName = model.CategoryName;
+            category.Description = model.Description;
+
+            try
+            {
+                _dbContext.Categories.Update(category);
+                _dbContext.SaveChanges();
+                return Ok(new 
+                {
+                    Message = "Kategori güncelleme işlemi başarılı",
+                    Model = category
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCategory(int? id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var category = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
+            if (category == null)
+            {
+                return NotFound("Kategori Bulunamadı");
+            }
+
+            try
+            {
+                _dbContext.Categories.Remove(category);
+                _dbContext.SaveChanges();
+                return Ok(new
+                {
+                    Message = "Kategori silme işlemi başarılı",
+                    Model = category
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }
