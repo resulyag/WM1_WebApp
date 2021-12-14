@@ -49,16 +49,21 @@ namespace Ilk_Mvc_Pojesi.Controllers.Apis
             {
                 return BadRequest();
             }
-
-            _dbContext.Categories.Add(new Category
+            var category = new Category
             {
-                CategoryName = model.CategoryName,
-                Description = model.Description
-            });
+                CategoryName=model.CategoryName,
+                Description =model.Description
+            };
+
+            _dbContext.Categories.Add(category);
             try
             {
                 _dbContext.SaveChanges();
-                return Ok("Kategori ekleme işlemi başarılı");
+                return Ok(new 
+                {
+                    Message = "Kategori ekleme işlemi başarılı",
+                    Model = category
+                });
             }
             catch (Exception ex)
             {
