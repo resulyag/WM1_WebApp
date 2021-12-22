@@ -5,7 +5,15 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ilk_Mvc_Pojesi", "Ilk_Mvc_Pojesi\Ilk_Mvc_Pojesi.csproj", "{0D96F711-5396-49A9-A23C-DE3A6BAD2556}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayoutKullanimi", "LayoutKullanimi\LayoutKullanimi.csproj", "{1D6E3642-E9F2-49B9-ADAA-7473DD36852A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayoutKullanimi", "LayoutKullanimi\LayoutKullanimi.csproj", "{1D6E3642-E9F2-49B9-ADAA-7473DD36852A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItServiceApp", "ItServiceApp\ItServiceApp.csproj", "{92061166-315F-4D2E-8A0D-1D6E948CC2AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1", "1", "{8A2DBE52-FEBC-4434-BE23-A14A951433E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2", "2", "{7B680F6E-C5CD-40F7-B9BD-19159BF77CED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3", "3", "{011D622F-325A-468A-98E2-0A40F5CEE4E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +29,18 @@ Global
 		{1D6E3642-E9F2-49B9-ADAA-7473DD36852A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D6E3642-E9F2-49B9-ADAA-7473DD36852A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D6E3642-E9F2-49B9-ADAA-7473DD36852A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92061166-315F-4D2E-8A0D-1D6E948CC2AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92061166-315F-4D2E-8A0D-1D6E948CC2AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92061166-315F-4D2E-8A0D-1D6E948CC2AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92061166-315F-4D2E-8A0D-1D6E948CC2AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D96F711-5396-49A9-A23C-DE3A6BAD2556} = {8A2DBE52-FEBC-4434-BE23-A14A951433E3}
+		{1D6E3642-E9F2-49B9-ADAA-7473DD36852A} = {7B680F6E-C5CD-40F7-B9BD-19159BF77CED}
+		{92061166-315F-4D2E-8A0D-1D6E948CC2AF} = {011D622F-325A-468A-98E2-0A40F5CEE4E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A19BC353-8672-4A48-A697-CF8644F393D4}
