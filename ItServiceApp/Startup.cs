@@ -43,9 +43,9 @@ namespace ItServiceApp
                  options.Lockout.AllowedForNewUsers = false;
 
                  // User settings
-                 options.User.AllowedUserNameCharacters = "";
+                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                  options.User.RequireUniqueEmail = true;
-             });
+             }).AddEntityFrameworkStores<MyContext>();
 
             services.ConfigureApplicationCookie(options =>
             {
