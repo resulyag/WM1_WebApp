@@ -4,6 +4,7 @@ using ItServiceApp.Models.Identity;
 using ItServiceApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ItServiceApp.Controllers
 {
@@ -12,9 +13,10 @@ namespace ItServiceApp.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -73,6 +75,7 @@ namespace ItServiceApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -93,6 +96,9 @@ namespace ItServiceApp.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
