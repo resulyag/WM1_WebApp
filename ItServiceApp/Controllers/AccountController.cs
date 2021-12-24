@@ -5,6 +5,9 @@ using ItServiceApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using ItServiceApp.Models;
+using System.Linq;
+using ItServiceApp.Services;
 
 namespace ItServiceApp.Controllers
 {
@@ -12,11 +15,30 @@ namespace ItServiceApp.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IEmailSender _emailSender;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,RoleManager<ApplicationRole> roleManager,IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
+            _emailSender = emailSender;
+            CheckRoles(); 
+        }
+
+        private void CheckRoles()
+        {
+            foreach (var roleName in RoleModels.Roles)
+            {
+                if (!_roleManager.RoleExistsAsync(roleName).Result)
+                {
+                    var result = _roleManager.CreateAsync(new ApplicationRole()
+                    {
+                        Name = roleName
+                    }).Result;
+                }
+            }
         }
 
         [HttpGet]
@@ -58,10 +80,12 @@ namespace ItServiceApp.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                //kullanıcıya rol atama
+                var count = _userManager.Users.Count();
+                result = await _userManager.AddToRoleAsync(user, count == 1 ? RoleModels.Admin : RoleModels.User);
+
                 //email onay maili
-                //login sayfasına yönlendirme
-                return RedirectToAction("Index", "Home");
+
+                return RedirectToAction("Login", "Account");
             }
             else
             {
