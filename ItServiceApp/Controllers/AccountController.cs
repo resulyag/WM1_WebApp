@@ -112,6 +112,15 @@ namespace ItServiceApp.Controllers
 
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByNameAsync(model.UserName);
+
+                await _emailSender.SendAsync(new EMailMessage()
+                {
+                    Contacts = new string[] {"resulyag@gmail.com"},
+                    Subject =$"{user.UserName} - Kullanıcı Giriş Yaptı",
+                    Body=$"{user.Name}{user.Surname} isimli kullanıcı {DateTime.Now:g} itibari ile siteye giriş yapmıştır"
+                });
+
                 return RedirectToAction("Index", "Home");
             }
             else
