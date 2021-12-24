@@ -71,9 +71,9 @@ namespace ItServiceApp
             app.UseHttpsRedirection(); //https - güvenli sertifika ile çalýþmasý için
             app.UseStaticFiles(); //wwwroot klasöründeki statik dosyalara eriþmek için
 
-            app.UseAuthentication();
+            app.UseAuthentication();// login logout kullanabilmek için
             app.UseRouting(); //rooting mekanizmasý için
-            app.UseAuthorization();
+            app.UseAuthorization();//authorization  attribute kullanabilmek için
 
             app.UseEndpoints(endpoints =>
             {
