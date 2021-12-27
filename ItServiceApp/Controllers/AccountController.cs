@@ -244,7 +244,7 @@ namespace ItServiceApp.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> UpdatePasswordAsync( PasswordChangeViewModel model)
+        public async Task<IActionResult> UpdatePassword( PasswordChangeViewModel model)
         {
             if (!ModelState.IsValid)
             {
