@@ -11,6 +11,7 @@ using ItServiceApp.Services;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
+using ItServiceApp.Extensions;
 
 namespace ItServiceApp.Controllers
 {
@@ -178,6 +179,89 @@ namespace ItServiceApp.Controllers
             }
 
             return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ProfileAsync()
+        {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var model = new UserProfileViewModel()
+            {
+                Email=user.Email,
+                Name=user.Name,
+                Surname=user.Surname
+            };
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ProfileAsync(UserProfileViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+
+            user.Name = model.Name;
+            user.Surname = model.Surname;
+            if (user.Email!=model.Email)
+            {
+                await _userManager.RemoveFromRoleAsync(user, RoleModels.User);
+                await _userManager.AddToRoleAsync(user, RoleModels.Passive);
+                user.Email = model.Email;
+
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                    protocol: Request.Scheme);
+
+                var emailMessage = new EMailMessage()
+                {
+                    Contacts = new string[] { user.Email },
+                    Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here<a/>.",
+                    Subject = "Confirm your email"
+                };
+
+                await _emailSender.SendAsync(emailMessage);
+
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, ModelState.ToFullErrorString());
+            }
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult UpdatePassword()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdatePasswordAsync( PasswordChangeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                ViewBag.Message = "Parola güncelleme işlemi başarılı";
+            }
+            else
+            {
+                ViewBag.Message = $"Bir hata oluştu: {ModelState.ToFullErrorString()}";
+            }
+
+            return RedirectToAction("Profile");
         }
     }
 }
