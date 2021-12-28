@@ -183,7 +183,7 @@ namespace ItServiceApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> ProfileAsync()
+        public async Task<IActionResult> Profile()
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
             var model = new UserProfileViewModel()
@@ -197,7 +197,7 @@ namespace ItServiceApp.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> ProfileAsync(UserProfileViewModel model)
+        public async Task<IActionResult> Profile(UserProfileViewModel model)
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
 
