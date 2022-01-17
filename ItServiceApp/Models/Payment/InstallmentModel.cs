@@ -1,4 +1,6 @@
-﻿namespace ItServiceApp.Models.Payment
+﻿using System.Collections.Generic;
+
+namespace ItServiceApp.Models.Payment
 {
     public class InstallmentModel
     {
@@ -12,5 +14,7 @@
         public long? BankCode { get; set; }
         public string BankName { get; set; }
         public int? ForceCvc { get; set; }
+        public List<InstallmentPriceModel> InstalmentPrices { get; set; }
+
     }
 }
