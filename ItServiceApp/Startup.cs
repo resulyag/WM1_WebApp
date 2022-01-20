@@ -91,9 +91,10 @@ namespace ItServiceApp
                         name: "default",
                         pattern: "{controller=Home}/{action=Index}/{id?}"
                     );
-                endpoints.MapControllerRoute(
-                        name: "areas",
-                        pattern: "{area:Admin}/{controller=Manage}/{action=Index}/{id?}"
+                endpoints.MapAreaControllerRoute(
+                        name:"admin",
+                        areaName:"admin",
+                        pattern:"admin/{controller=Manage}/{action=Index}/{id?}"
                     );
             });//default routing nasýl olacaðýný belitmek için
         }
