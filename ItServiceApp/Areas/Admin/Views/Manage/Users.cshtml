@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Tüm Kullanıcılar";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class=col>
+                            <h4 class="card-title">Kullanıcı Detayları</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="dxGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/vendor/devextreme-aspnet-data/js/dx.aspnet.data.js"></script>
+    <script>
+        var dataGrid = null;
+        $(()=>{
+            console.log("Yüklendi");
+        });
+    </script>
+}

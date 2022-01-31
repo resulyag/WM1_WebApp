@@ -43,6 +43,10 @@ namespace ItServiceApp.Controllers
                     }).Result;
                 }
             }
+
+            //var admin = _userManager.Users.First(x => x.Email == "admin@admin.com");  // Şifreyi unutursak eğer burdan şifreyi değiştirebiliyoruz
+            //var v1 = _userManager.RemovePasswordAsync(admin).Result;
+            //var v2 = _userManager.AddPasswordAsync(admin, "1234567890*").Result;
         }
 
         [HttpGet]
