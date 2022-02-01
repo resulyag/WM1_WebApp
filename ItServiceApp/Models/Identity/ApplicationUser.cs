@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ItServiceApp.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace ItServiceApp.Models.Identity
@@ -16,5 +17,8 @@ namespace ItServiceApp.Models.Identity
         [PersonalData]
         public string Surname { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        public virtual List<Address> Addresses { get; set; }
+        public virtual List<Subscription> Subscriptions { get; set; }
     }
 }
