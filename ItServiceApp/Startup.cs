@@ -68,7 +68,7 @@ namespace ItServiceApp
             services.AddAutoMapper(options =>
             {
                 options.AddProfile<PaymentProfile>();
-                //options.AddProfile(typeof(PaymentProfile));
+                options.AddProfile(typeof(EntityProfile));
             });
 
             services.AddControllersWithViews()

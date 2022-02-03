@@ -1,10 +1,13 @@
-﻿namespace ItServiceApp.ViewModels
+﻿using System;
+
+namespace ItServiceApp.ViewModels
 {
     public class PricingTableViewModel
     {
-        public string PricingName { get; set; }
-        public decimal PricingPrice { get; set; }
-        public string PricingDescription { get; set; }
-        public int PricingMonth { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public int Month { get; set; }
     }
 }
