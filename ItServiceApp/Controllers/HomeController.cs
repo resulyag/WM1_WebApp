@@ -22,16 +22,15 @@ namespace ItServiceApp.Controllers
 
 
 
-
         public IActionResult Index()
         {
             //List<PricingTableViewModel> result = new List<PricingTableViewModel>();
 
-            var model = _dbContext.SubscriptionTypes
-                .OrderBy(x => x.Price)
-                .ToList()
-                .Select(x=>_mapper.Map<PricingTableViewModel>(x))
-                .ToList();
+            //var model = _dbContext.SubscriptionTypes
+            //    .OrderBy(x => x.Price)
+            //    .ToList()
+            //    .Select(x=>_mapper.Map<PricingTableViewModel>(x))
+            //    .ToList();
 
             //var data = _dbContext.SubscriptionTypes.ToList();
             
@@ -45,7 +44,7 @@ namespace ItServiceApp.Controllers
             //        Price = item.Price
             //    });
             //}
-            return View(model);
+            return View();
         }
     }
 }
