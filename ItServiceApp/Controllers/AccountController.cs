@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using ItServiceApp.Models.Identity;
-using ItServiceApp.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using ItServiceApp.Business.Services.Email;
+using ItServiceApp.Core.ComplexTypes;
+using ItServiceApp.Core.Identity;
+using ItServiceApp.Core.ViewModels;
+using ItServiceApp.Extensions;
 using Microsoft.AspNetCore.Authorization;
-using ItServiceApp.Models;
-using System.Linq;
-using ItServiceApp.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using System;
+using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using ItServiceApp.Extensions;
+using System.Threading.Tasks;
 
 namespace ItServiceApp.Controllers
 {

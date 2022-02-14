@@ -1,9 +1,8 @@
-using System;
-using System.IO;
+using ItServiceApp.Business.MapperProfiles;
+using ItServiceApp.Business.Services.Email;
+using ItServiceApp.Business.Services.Payment;
+using ItServiceApp.Core.Identity;
 using ItServiceApp.Data;
-using ItServiceApp.MapperProfiles;
-using ItServiceApp.Models.Identity;
-using ItServiceApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace ItServiceApp
 {

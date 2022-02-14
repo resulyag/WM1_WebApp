@@ -1,7 +1,7 @@
 ﻿using DevExtreme.AspNet.Data;
+using ItServiceApp.Core.Identity;
+using ItServiceApp.Core.ViewModels;
 using ItServiceApp.Extensions;
-using ItServiceApp.Models.Identity;
-using ItServiceApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
